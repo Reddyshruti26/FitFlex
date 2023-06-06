@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Profile Display</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <style>
+      .edit-field {
+        display: inline;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="col-6 offset-md-3">
+          <h1 class="display-3 mt-3 mb-3">Profile Display</h1>
+          <p><label>Profile ID: {{ profile_id }}</label></p>
+
+          <p>
+            <label>Name:</label>
+            <span id="name">{{ profile.name }}</span>
+            <span class="edit-field" id="edit-name" onclick="editField('name')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Age:</label>
+            <span id="age">{{ profile.age }}</span>
+            <span class="edit-field" id="edit-age" onclick="editField('age')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Gender:</label>
+            <span id="gender">{{ profile.gender }}</span>
+            <span
+              class="edit-field"
+              id="edit-gender"
+              onclick="editField('gender')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Height:</label>
+            <span id="height">{{ profile.height }}</span>
+            <span
+              class="edit-field"
+              id="edit-height"
+              onclick="editField('height')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Weight:</label>
+            <span id="weight">{{ profile.weight }}</span>
+            <span
+              class="edit-field"
+              id="edit-weight"
+              onclick="editField('weight')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>BMI:</label>
+            <span id="bmi">{{ profile.bmi }}</span>
+            <span class="edit-field" id="edit-bmi" onclick="editField('bmi')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Current Medication:</label>
+            <span id="medication">{{ profile.medication }}</span>
+            <span
+              class="edit-field"
+              id="edit-medication"
+              onclick="editField('medication')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Medical History:</label>
+            <span id="history">{{ profile.history }}</span>
+            <span
+              class="edit-field"
+              id="edit-history"
+              onclick="editField('history')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <label>Fitness Goals:</label>
+            <span id="fitnessGoal">{{ profile.fitnessGoal}}</span>
+            <span
+              class="edit-field"
+              id="edit-fitnessGoal"
+              onclick="editField('fitnessGoal')"
+              ><i class="fas fa-pencil-alt edit-icon"></i
+            ></span>
+          </p>
+
+          <p>
+            <button class="btn btn-primary" onclick="signOut()">
+              Sign Out
+            </button>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function editField(field) {
+        // Get the current value of the field
+        var value = document.getElementById(field).innerText;
+
+        // Create an input element to edit the field
+        var input = document.createElement("input");
+        input.type = "text";
+        input.value = value;
+        input.classList.add("form-control");
+
+        // Replace the field with the input element
+        document.getElementById(field).replaceWith(input);
+
+        // Create a save button
+        var saveBtn = document.createElement("button");
+        saveBtn.innerText = "Save";
+        saveBtn.classList.add("btn");
+        saveBtn.classList.add("btn-primary");
+        saveBtn.addEventListener("click", function () {
+          saveField(field);
+        });
+
+        // Append the save button after the input element
+        input.insertAdjacentElement("afterend", saveBtn);
+      }
+
+      function saveField(field) {
+        // Get the updated value from the input element
+        var updatedValue = document.querySelector('input[type="text"]').value;
+
+        // Create a new span element to replace the input element
+        var span = document.createElement("span");
+        span.id = field;
+        span.innerText = updatedValue;
+
+        // Replace the input element with the new span element
+        document.querySelector('input[type="text"]').replaceWith(span);
+
+        // Remove the save button
+        document.querySelector("button").remove();
+      }
+
+      function signOut() {
+        window.location.href = "/sign_out";
+      }
+    </script>
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
