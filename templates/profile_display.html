@@ -127,19 +127,15 @@
 
     <script>
       function editField(field) {
-        // Get the current value of the field
         var value = document.getElementById(field).innerText;
 
-        // Create an input element to edit the field
         var input = document.createElement("input");
         input.type = "text";
         input.value = value;
         input.classList.add("form-control");
 
-        // Replace the field with the input element
         document.getElementById(field).replaceWith(input);
 
-        // Create a save button
         var saveBtn = document.createElement("button");
         saveBtn.innerText = "Save";
         saveBtn.classList.add("btn");
@@ -148,23 +144,18 @@
           saveField(field);
         });
 
-        // Append the save button after the input element
         input.insertAdjacentElement("afterend", saveBtn);
       }
 
       function saveField(field) {
-        // Get the updated value from the input element
         var updatedValue = document.querySelector('input[type="text"]').value;
 
-        // Create a new span element to replace the input element
         var span = document.createElement("span");
         span.id = field;
         span.innerText = updatedValue;
 
-        // Replace the input element with the new span element
         document.querySelector('input[type="text"]').replaceWith(span);
 
-        // Remove the save button
         document.querySelector("button").remove();
       }
 
